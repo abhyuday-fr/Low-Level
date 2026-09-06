@@ -1,4 +1,4 @@
-test:
-	gcc -g autograd.c model.c prng.c mat.c -o test
+all:
+	gcc env.c -o env -lm
 clean:
 	rm -rf test

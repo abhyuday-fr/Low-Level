@@ -2,3 +2,4 @@ test
 .gdb_history
 *.o
 *.out
+env
