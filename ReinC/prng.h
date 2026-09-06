@@ -1,0 +1,23 @@
+#ifndef PRNG_H
+#define PRNG_H
+
+#include "base.h"
+
+// based on pcg random number generator
+
+typedef struct {
+  u64 state;
+  u64 inc;
+} prng_state;
+
+void prng_seed_r(prng_state *rng, u64 initstate, u64 initseq);
+void prng_seed(u64 initstate, u64 initseq);
+
+u32 prng_rand_r(prng_state *rng);
+u32 prng_rand(void);
+u32 randn(u32 range);
+
+f32 prng_randf_r(prng_state *rng);
+f32 prng_randf(void);
+
+#endif
