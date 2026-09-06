@@ -1,7 +1,7 @@
 #ifndef BASE_H
 #define BASE_H
 
-#define CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <math.h>
 #include <stdbool.h>
@@ -26,9 +26,9 @@ typedef uint32_t b32;
 typedef float f32;
 typedef double f64;
 
-#define KiB(n) ((u64)n << 10)
-#define MiB(n) ((u64)n << 20)
-#define GiB(n) ((u64)n << 30)
+#define KiB(n) ((u64)(n) << 10)
+#define MiB(n) ((u64)(n) << 20)
+#define GiB(n) ((u64)(n) << 30)
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
