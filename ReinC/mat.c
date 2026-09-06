@@ -119,14 +119,13 @@ b32 matmul(matrix *out, const matrix *a, const matrix *b, b8 zero_out,
            b8 transpose_a, b8 transpose_b) {
   u32 a_rows = transpose_a ? a->cols : a->rows;
   u32 a_cols = transpose_a ? a->rows : a->cols;
-  u32 b_rows = transpose_b ? a->cols : a->rows;
-  u32 b_cols = transpose_b ? a->rows : a->cols;
+  u32 b_rows = transpose_b ? b->cols : b->rows;
+  u32 b_cols = transpose_b ? b->rows : b->cols;
 
   if (a_cols != b_rows) {
     return false;
   }
-
-  if (out->rows != a->rows || out->cols != b->cols) {
+  if (out->rows != a_rows || out->cols != b_cols) {
     return false;
   }
 
@@ -134,7 +133,7 @@ b32 matmul(matrix *out, const matrix *a, const matrix *b, b8 zero_out,
     clear(out);
   }
 
-  u32 transpose = (transpose << 1) | transpose_b;
+  u32 transpose = (transpose_a << 1) | transpose_b;
   switch (transpose) {
   case 0: {
     _mat_mul_nn(out, a, b);
@@ -190,6 +189,7 @@ b32 softmax(matrix *out, const matrix *in) {
 }
 
 b32 reinforce_loss(matrix *out, const matrix *probs, const matrix *advantages) {
+
   if (probs->rows != advantages->rows || probs->cols != advantages->cols) {
     return false;
   }
