@@ -8,7 +8,7 @@ A Reinforcement Learning Model made in C
 ## Some Revision of the concepts
 
 ### Forward Pass
-In this [drawio](forward_pass_flowchart.drawio) of forward pass, it is shown how an input vector x gets transformed step-by-step into output class probabilities.
+In this [drawio](./assets/forward_pass_flowchart.drawio) of forward pass, it is shown how an input vector x gets transformed step-by-step into output class probabilities.
 
 **Layer 1 (hidden layer 1):**
 
@@ -30,8 +30,10 @@ In this [drawio](forward_pass_flowchart.drawio) of forward pass, it is shown how
 10. Softmax : convert those logits into a probability distribution (values between 0 and 1 that sum to 1).
 11. Output probabilities : the final result: a probability for each class.
 
+---
+
 ### Backward Pass
-In this [drawio](backward_pass_flowchart.drawio) of backward pass, it is shown that this mirrors the forward pass structure but runs in reverse
+In this [drawio](./assets/backward_pass_flowchart.drawio) of backward pass, it is shown that this mirrors the forward pass structure but runs in reverse
 
 1. Output probs & labels y : you need both the prediction and the ground truth to start.
 2. Loss (Cross-Entropy) : measures how wrong the prediction was.
@@ -40,3 +42,6 @@ In this [drawio](backward_pass_flowchart.drawio) of backward pass, it is shown t
 5. Backprop Matmul (W2) : branches off dW2 (gradient w.r.t. weights = gradient × previous activation, transposed), and passes the gradient further back.
 6. Activation' (Z2) : multiply by the derivative of the activation function (chain rule). Same pattern repeats for b1 / W1 / Z1 and same pattern repeats for b0 / W0 (the first layer).
 7. Update parameters : once you have all the dW's and db's, apply gradient descent (W -= lr * dW).
+
+## Training of the Snake env
+![output](./assets/output.png)
