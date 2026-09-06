@@ -1,5 +1,6 @@
 #include "arena.h"
 #include "base.h"
+#include <stdlib.h>
 #include <string.h>
 
 // autograd automatically computes the gradients of the loss function with
@@ -116,6 +117,43 @@ Var *create_node(mem_arena *arena, model_state *model, Var *a, Var *b,
   }
 
   return var;
+}
+
+Graph create_graph(mem_arena *arena, model_state *model, Var *out_var) {
+  Graph graph = {0};
+
+  b32 *visited = calloc(model->num_vars, sizeof(visited));
+  Var **stack = malloc(sizeof(Var) * model->num_vars);
+  Var **out = malloc(sizeof(*out) * model->num_vars);
+
+  u32 stack_size = 0;
+  u32 out_size = 0;
+
+  stack[stack_size++] = out_var; // stack size will increase after storing
+
+  while (stack_size > 0) {
+    Var *cur = stack[--stack_size]; // stack size will decrease after storing
+
+    if (visited[cur->index]) {
+      out[out_size++] = cur;
+      continue;
+    }
+
+    u32 inputs = cur->type != NULL ? cur->type->num_inputs : 0;
+    for (u32 i = 0; i < inputs; i++) {
+      Var *input = inputs[i];
+
+      for (u32 j = 0; j < stack_size; j++) {
+        if (stack[j] == input) {
+          for (u32 k = j; j < stack_size - 1; k++) {
+            stack[k] = stack[k + 1];
+          }
+        }
+        stack_size--;
+      }
+      stack[stack_size++] = input;
+    }
+  }
 }
 
 Var *var_softmax(mem_arena *arena, model_state *model, VarType type,
