@@ -16,8 +16,8 @@ void arena_destroy(mem_arena *arena);
 void *arena_push(mem_arena *arena, u64 size, b32 zero);
 
 #define PUSH_STRUCT(arena, T) (T *)arena_push((arena), sizeof(T), true)
-#define PUSH_ARRAY(arena, T, n) (T *)arena_push((arena), sizeof(T) * n, true)
+#define PUSH_ARRAY(arena, T, n) (T *)arena_push((arena), sizeof(T) * (n), true)
 #define PUSH_ARRAY_UNINIT(arena, T, n)                                         \
-  (T *)arena_push((arena), sizeof(T) * n, false)
+  (T *)arena_push((arena), sizeof(T) * (n), false)
 
 #endif
