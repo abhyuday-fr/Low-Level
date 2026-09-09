@@ -38,8 +38,8 @@ public:
   IpcRingBuffer(const IpcRingBuffer &) = delete;
   IpcRingBuffer &operator=(const IpcRingBuffer &) = delete;
 
-  bool init_as_prodcuer(const std::string name);
-  bool init_as_consumer(const std::string name);
+  bool init_as_prodcuer(const std::string &name);
+  bool init_as_consumer(const std::string &name);
 
   bool push(uint8_t value);
 
