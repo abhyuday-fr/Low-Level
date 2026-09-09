@@ -46,7 +46,7 @@ public:
 private:
   SharedRingBufferData *m_buffer;
   std::string m_name;
-  bool is_producer;
+  bool m_is_producer;
   size_t m_mapped_size;
 
   void cleanup();
