@@ -5,7 +5,6 @@ This repository contains the low level projects I have made till now in the C/C+
 
 ### Deserve a repo of their own
 
-- [Port Scanner /TCP Scanner](knocker) - This one, in my opinion, deserves the most recognition among all as I used a lot of engineering in making it powerful.
 - [Container Runtime](rocker)
 - [Reinforcement Learning Library in C](ReinC)
 
