@@ -1,10 +1,7 @@
 # Knocker 🚪‼️ 
 
-A simple single threaded blocking TCP port scanner made in C++ which knocks at each port's door in the specified range of ports defined by the user.
+A TCP open ports scanner which knocks at each port's door in the specified range of ports defined by the user.
 I can hear it say "I am the one who knocks".
-
-This is a project I am working on while I'm still learning stuff, so expect many wrong things in here but not totally wrong.
-You are most welcome to contdibute and correct things out :)
 
 ## What are these different versions and why so many of them?
 I've made different versions of the same port scanner, each one impose some problems and solve the ones introduced by previous one.
