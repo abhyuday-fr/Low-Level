@@ -2,8 +2,16 @@
 A Reinforcement Learning Model made in C
 
 ## How to build and run
-1. run `make` or `gcc env.c -o env -lm`
-2. then tun `./env`
+1. Install [raylib](https://www.raylib.com/)
+2. run `make`
+3. run
+  - `./snake_train`   opens a window, renders episode 0 of every epoch
+  - `./snake_train 5` only renders episode 0 every 5th epoch (trains faster overall)
+  - `./snake_train 0` no window at all, original full speed headless training
+
+### Controls in the window
+- **Hold space** - fast forward the episode you're watching
+- **esc / close window** - stop watching, training keeps going headless in the terminal for the rest of the run
 
 ## Some Revision of the concepts
 
