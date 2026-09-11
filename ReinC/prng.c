@@ -42,7 +42,7 @@ u32 randn_r(prng_state *rng, u32 range) {
   }
 }
 
-u32 randn(u32 range) { return arc4random_uniform(range); }
+u32 randn(u32 range) { return randn_r(&s_prng_state, range); }
 
 f32 prng_randf_r(prng_state *rng) {
   return (f32)prng_rand_r(rng) / (f32)UINT32_MAX;
