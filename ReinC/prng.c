@@ -27,6 +27,21 @@ u32 prng_rand_r(prng_state *rng) {
 
 u32 prng_rand(void) { return prng_rand_r(&s_prng_state); }
 
+u32 randn_r(prng_state *rng, u32 range) {
+  if (range == 0) {
+    return 0;
+  }
+
+  u32 threshold = -range % range;
+
+  for (;;) {
+    u32 r = prng_rand_r(rng);
+    if (r >= threshold) {
+      return r % range;
+    }
+  }
+}
+
 u32 randn(u32 range) { return arc4random_uniform(range); }
 
 f32 prng_randf_r(prng_state *rng) {
