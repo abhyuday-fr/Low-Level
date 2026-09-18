@@ -1,3 +1,4 @@
+#include <chrono>
 #include <cstdint>
 #include <cstdlib>
 #include <iostream>
@@ -19,6 +20,8 @@ void run_producer() {
   while (true) {
     if (ring_buffer.push(counter)) {
       std::cout << "Sent: " << (int)counter << '\n';
+      counter++;
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
     } else {
       std::this_thread::yield();
     }
