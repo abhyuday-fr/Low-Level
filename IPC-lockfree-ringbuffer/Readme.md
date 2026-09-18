@@ -5,6 +5,10 @@ The most practical and efficient approach is the Single-Producer, Single-Consume
 # A note for the ARM architecture users
 in the [header](./ipc_ringbuffer.hh) around line 17 set `CACHE_LINE_SIZE` to `128`
 
+# Example
+
+![screenshot](./assets/screenshot.png)
+
 # How to build and run
 
 1. run `make all`
