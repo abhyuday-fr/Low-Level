@@ -23,6 +23,8 @@ void run_producer() {
       counter++;
       std::this_thread::sleep_for(std::chrono::milliseconds(500));
     } else {
+      // TODO: Check for cpu thrashing when SharedRingBuffer::CAPACITY (1024 for
+      // now) is reached
       std::this_thread::yield();
     }
   }
@@ -41,6 +43,7 @@ void run_consumer() {
     if (ring_buffer.pop(value)) {
       std::cout << "Received: " << (int)value << "\n";
     } else {
+      // TODO: Check for cpu thrashing when producer not running
       std::this_thread::yield();
     }
   }
