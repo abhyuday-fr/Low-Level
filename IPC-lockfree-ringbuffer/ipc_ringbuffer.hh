@@ -42,6 +42,7 @@ public:
   bool init_as_consumer(const std::string &name);
 
   bool push(uint8_t value);
+  bool pop(uint8_t &out_value);
 
 private:
   SharedRingBufferData *m_buffer;
