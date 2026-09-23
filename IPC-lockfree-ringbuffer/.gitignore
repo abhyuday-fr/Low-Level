@@ -1,3 +1,4 @@
 ipc_ringbuffer
 test
 test.cc
+.gdb_history
