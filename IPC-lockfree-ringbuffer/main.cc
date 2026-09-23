@@ -5,6 +5,7 @@
 #include <thread>
 
 #include "ipc_ringbuffer.hh"
+#include "spin_backoff.hh"
 
 const std::string SHM_NAME = "/spsc_zero_copy_buffer";
 
@@ -16,16 +17,20 @@ void run_producer() {
   }
 
   std::cout << "[Producer] ready. Streaming data...\n";
+
+  SpinBackoff backoff;
   uint8_t counter = 0;
+
   while (true) {
     if (ring_buffer.push(counter)) {
       std::cout << "Sent: " << (int)counter << '\n';
       counter++;
+
+      backoff.reset(); // restore low-latency state on success
+
       std::this_thread::sleep_for(std::chrono::milliseconds(500));
     } else {
-      // TODO: Check for cpu thrashing when SharedRingBuffer::CAPACITY (1024 for
-      // now) is reached
-      std::this_thread::yield();
+      backoff.spin();
     }
   }
 }
@@ -38,13 +43,17 @@ void run_consumer() {
   }
 
   std::cout << "[Consumer] attatched. Listening for data...\n";
+
+  SpinBackoff backoff;
   uint8_t value;
+
   while (true) {
     if (ring_buffer.pop(value)) {
       std::cout << "Received: " << (int)value << "\n";
+
+      backoff.reset(); // restore low-latency state on success
     } else {
-      // TODO: Check for cpu thrashing when producer not running
-      std::this_thread::yield();
+      backoff.spin();
     }
   }
 }
