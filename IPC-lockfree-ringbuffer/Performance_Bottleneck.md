@@ -86,3 +86,9 @@ public:
     }
 };
 ```
+
+## Performance after the approach
+
+After implementing spin backoff strategy, I profiled the `./ipc_ringbuffer consumer` alone again with Liunx `perf` and got the following results:
+
+![after](./assets/performance-after.png)
